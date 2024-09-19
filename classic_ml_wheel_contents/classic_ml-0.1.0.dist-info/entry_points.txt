@@ -1,0 +1,3 @@
+[console_scripts]
+classic-ml=classic_ml.__main__:main
+

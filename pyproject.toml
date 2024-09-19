@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "classic-ml"
+name = "rag-classic-ml"
 version = "0.1.0"
-description = "Classical Machine Learning methods."
+description = "Classical Machine Learning methods for Reterival Augmented Generation"
 authors = ["VatsalPatel18 <vatsal1804@gmail.com>"]
 readme = "README.md"
 
@@ -21,4 +21,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-classic-ml = "classic_ml.__main__:main"
+rag-classic-ml = "rag_classic_ml.__main__:main"
