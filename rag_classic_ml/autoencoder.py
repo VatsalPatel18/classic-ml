@@ -3,6 +3,7 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models, regularizers
 import json
+import os
 
 class Autoencoder:
     def __init__(self, encoder_config, input_dim, latent_dim, activation='relu', optimizer='adam', loss='mse', metrics=None):

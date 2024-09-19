@@ -1,0 +1,4 @@
+Significant Group Pairs (p < 0.05):
+2 vs 1
+0 vs 3
+0 vs 1

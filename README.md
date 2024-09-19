@@ -2,7 +2,7 @@
 
 **RAG-Classic-ML** is a versatile Python package designed to provide out-of-the-box machine learning pipelines for both basic and advanced tasks. It simplifies the process of building, training, and evaluating models for tasks like classification, regression, autoencoder-based feature extraction, and survival clustering. The package is designed for ease of use, offering pre-built pipelines and customizable parameters for a variety of machine learning algorithms.
 
-## Table of Contents 
+## Table of Contents  
 
 - [Features](#features)
 - [Installation](#installation)
