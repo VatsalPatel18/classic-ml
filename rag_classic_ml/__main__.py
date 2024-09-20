@@ -64,6 +64,7 @@ def main():
     # Predict Clusters sub-command
     predict_clusters_parser = subparsers.add_parser('predict_clusters', help="Predict clusters using a trained KMeans model and perform survival analysis")
     predict_clusters_parser.add_argument('--data', type=str, required=True, help='Path to the input CSV file containing the latent features.')
+    predict_clusters_parser.add_argument('--clinical_data', type=str, required=True, help='Path to the input CSV file containing the clinical data.')
     predict_clusters_parser.add_argument('--model_dir', type=str, required=True, help='Directory where the trained KMeans model is saved.')
     predict_clusters_parser.add_argument('--output_dir', type=str, required=True, help='Directory to save the cluster predictions and analysis results.')
 

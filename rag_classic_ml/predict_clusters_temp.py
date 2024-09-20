@@ -1,4 +1,4 @@
-# predict_clusters.py
+# predict_clusters_temp.py
 
 import argparse
 import os
@@ -23,7 +23,7 @@ def main(args):
     kmeans = load(model_path)
     print(f"KMeans model loaded from {model_path}")
 
-    # Load and preprocess latent feature data
+    # Load and preprocess data
     df = pd.read_csv(args.data).set_index('PatientID')
     latent_features = df.to_numpy()
     print(f"Data loaded from {args.data}, shape: {df.shape}")
@@ -38,25 +38,12 @@ def main(args):
     df[['groups']].to_csv(predictions_path)
     print(f"Cluster predictions saved to {predictions_path}")
 
-    # Load clinical data
-    clnc_df = pd.read_csv(args.clinical_data).set_index('PatientID')
-    print(f"Clinical data loaded from {args.clinical_data}, shape: {clnc_df.shape}")
-
-    # Attach predicted clusters to clinical data
-    clnc_df = clnc_df.join(df[['groups']], how='inner')
-    print("Merged clinical data with cluster labels.")
-
-    # Save the clinical data with cluster groups attached
-    merged_data_path = os.path.join(args.output_dir, 'clinical_data_with_clusters.csv')
-    clnc_df.to_csv(merged_data_path)
-    print(f"Clinical data with cluster groups saved to {merged_data_path}")
-
-    # If survival data is available in the clinical data, perform survival analysis
-    if 'Overall Survival (Months)' in clnc_df.columns and 'Overall Survival Status' in clnc_df.columns:
-        print("Survival data detected in clinical data. Performing survival analysis.")
-        perform_survival_analysis(clnc_df, args.output_dir)
+    # If survival data is available, perform survival analysis
+    if 'Overall Survival (Months)' in df.columns and 'Overall Survival Status' in df.columns:
+        print("Survival data detected. Performing survival analysis.")
+        perform_survival_analysis(df, args.output_dir)
     else:
-        print("Survival data not found in the clinical data. Skipping survival analysis.")
+        print("Survival data not found in the input file. Skipping survival analysis.")
 
 def perform_survival_analysis(df, output_dir):
     # Generate color list based on median survival
@@ -189,7 +176,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Predict clusters using a trained KMeans model and perform survival analysis.")
 
     parser.add_argument('--data', type=str, required=True, help='Path to the input CSV file containing the latent features.')
-    parser.add_argument('--clinical_data', type=str, required=True, help='Path to the input CSV file containing the clinical data.')
     parser.add_argument('--model_dir', type=str, required=True, help='Directory where the trained KMeans model is saved.')
     parser.add_argument('--output_dir', type=str, required=True, help='Directory to save the cluster predictions and analysis results.')
 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rag-classic-ml"
-version = "0.1.2"
+version = "0.1.3"
 description = "Classical Machine Learning methods for Reterival Augmented Generation"
 authors = ["VatsalPatel18 <vatsal1804@gmail.com>"]
 readme = "README.md"
