@@ -20,13 +20,16 @@ def main(args):
     X_data = df.to_numpy()
 
     # Load the trained models
-    encoder = models.load_model(os.path.join(args.model_dir, 'encoder.h5'))
-    decoder = models.load_model(os.path.join(args.model_dir, 'decoder.h5'))
-    autoencoder_model = models.load_model(os.path.join(args.model_dir, 'autoencoder.h5'))
+    encoder = models.load_model(os.path.join(args.model_dir, 'encoder.h5'), compile=False)
+    decoder = models.load_model(os.path.join(args.model_dir, 'decoder.h5'), compile=False)
+    autoencoder_model = models.load_model(os.path.join(args.model_dir, 'autoencoder.h5'), compile=False)
     print(f"Autoencoder models loaded from {args.model_dir}")
 
+    autoencoder_model.compile(optimizer='adam', loss='mse', metrics=['mse'])
+    
     # Evaluate the autoencoder on the new data
     evaluation = autoencoder_model.evaluate(X_data, X_data, batch_size=args.batch_size, verbose=1)
+    
     print(f"Evaluation on new data: {evaluation}")
 
     # Save evaluation metrics
