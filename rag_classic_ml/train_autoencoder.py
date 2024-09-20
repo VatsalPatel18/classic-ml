@@ -107,6 +107,7 @@ def main(args):
         input_dim=X_train.shape[1],
         latent_dim=args.latent_dim if args.latent_dim else max(1, X_train.shape[1] // 8),
         activation=args.activation,
+        output_activation=args.output_activation,
         optimizer=args.optimizer,
         loss=args.loss,
         metrics=args.metrics
@@ -185,6 +186,7 @@ if __name__ == "__main__":
     parser.add_argument('--encoder_config', type=str, help='Path to the JSON file defining encoder architecture. If not provided, a temporary config will be generated.')
     parser.add_argument('--latent_dim', type=int, help='Dimensionality of the latent space. If not specified, defaults to input_dim // 8.')
     parser.add_argument('--activation', type=str, default='relu', help='Activation function to use in hidden layers.')
+    parser.add_argument('--output_activation', type=str, default='sigmoid', help='Activation function for output layer.') 
     parser.add_argument('--optimizer', type=str, default='adam', help='Optimizer to use for training.')
     parser.add_argument('--loss', type=str, default='mse', help='Loss function to use.')
     parser.add_argument('--metrics', nargs='+', default=['mse'], help='List of metrics to evaluate.')

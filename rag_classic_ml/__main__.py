@@ -33,6 +33,7 @@ def main():
     autoencoder_parser.add_argument('--encoder_config', type=str, help='Path to the JSON file defining encoder architecture. If not provided, a temporary config will be generated.')
     autoencoder_parser.add_argument('--latent_dim', type=int, help='Dimensionality of the latent space. If not specified, defaults to input_dim // 8.')
     autoencoder_parser.add_argument('--activation', type=str, default='relu', help='Activation function to use in hidden layers.')
+    autoencoder_parser.add_argument('--output_activation', type=str, default='sigmoid', help='Activation function for the output layer.')
     autoencoder_parser.add_argument('--optimizer', type=str, default='adam', help='Optimizer to use for training.')
     autoencoder_parser.add_argument('--loss', type=str, default='mse', help='Loss function to use.')
     autoencoder_parser.add_argument('--metrics', nargs='+', default=['mse'], help='List of metrics to evaluate.')

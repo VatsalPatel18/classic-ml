@@ -6,7 +6,7 @@ import json
 import os
 
 class Autoencoder:
-    def __init__(self, encoder_config, input_dim, latent_dim, activation='relu', optimizer='adam', loss='mse', metrics=None):
+    def __init__(self, encoder_config, input_dim, latent_dim, activation='relu', output_activation='sigmoid',optimizer='adam', loss='mse', metrics=None):
         """
         Initializes the Autoencoder with the given configuration.
 
@@ -23,6 +23,7 @@ class Autoencoder:
         self.input_dim = input_dim
         self.latent_dim = latent_dim
         self.activation = activation
+        self.output_activation = output_activation
         self.optimizer = optimizer
         self.loss = loss
         self.metrics = metrics if metrics is not None else ['mse']
@@ -88,7 +89,7 @@ class Autoencoder:
                 x = layers.Dropout(rate=dropout_rate, name=f'Decoder_Dropout_{idx+1}')(x)
 
         # Output layer
-        output_layer = layers.Dense(self.input_dim, activation='sigmoid', name='Decoder_Output')(x)
+        output_layer = layers.Dense(self.input_dim, activation=self.output_activation, name='Decoder_Output')(x)
 
         decoder_model = models.Model(inputs=decoder_input, outputs=output_layer, name='Decoder')
         return decoder_model
